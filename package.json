@@ -1,44 +1,46 @@
 {
-  "name": "mithril-emmet",
-  "displayName": "mithril-emmet",
-  "description": "Support emmet syntax for mithril",
-  "version": "0.0.1",
-  "publisher": "FallenMax",
-  "engines": {
-    "vscode": "^1.5.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "mithril",
-    "emmet",
-    "expander",
-    "snippet"
-  ],
-  "activationEvents": [
-    "onCommand:mithrilEmmet.expand"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/FallenMax/mithril-emmet"
-  },
-  "main": "./extension",
-  "contributes": {
-    "commands": [{
-      "command": "mithrilEmmet.expand",
-      "title": "Expand Emmet to Mithril"
-    }]
-  },
-  "scripts": {
-    "test": "jest",
-    "postinstall": "node ./node_modules/vscode/bin/install"
-  },
-  "devDependencies": {
-    "jest": "^15.1.1",
-    "vscode": "^0.11.0"
-  },
-  "dependencies": {
-    "emmet": "^1.6.0"
-  }
+    "name": "mithril-emmet",
+    "displayName": "Mithril Emmet",
+    "description": "Support Emmet(zen-coding) syntax for Mithril",
+    "version": "0.2.0",
+    "publisher": "FallenMax",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "mithril",
+        "emmet",
+        "expander",
+        "snippet"
+    ],
+    "activationEvents": [
+        "onCommand:mithrilEmmet.expand"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FallenMax/mithril-emmet"
+    },
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "mithrilEmmet.expand",
+                "title": "Expand Emmet to Mithril"
+            }
+        ]
+    },
+    "scripts": {
+        "test": "jest",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "jest": "^15.1.1",
+        "vscode": "^0.11.0"
+    },
+    "dependencies": {
+        "emmet": "^1.6.0"
+    }
 }
