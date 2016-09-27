@@ -27,13 +27,18 @@ Example:
 ```
 ## Known Issues
 
-- Emmet snippets are not supported for now (e.g. '!'=>html)
+- Does not support tab stops (see: https://github.com/Microsoft/vscode/issues/3210)
+- Some emmet snippets are not supported (e.g. `!!!` => `<!DOCTYPE html>`)
 
 ## Release Notes
 
+### 0.3.0
+
+Remove tab stop placeholders from output
+
 ### 0.0.1
 
-first release
+First release
 
 
 [emmet]: http://emmet.io/

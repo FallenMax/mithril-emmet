@@ -96,6 +96,15 @@ m('.row.text-red', {
   ))
 })
 
+it('expand abbreviation: remove tab stop placeholders', () => {
+  const { expand } = require('../lib/expander')
+  const input = 'input'
+  const output = expand(input)
+
+  expect(trim(output)).toBe(trim(
+    `m('input', { type: '' })`
+  ))
+})
 
 it('expand abbreviation: with indent level', () => {
   const { expand } = require('../lib/expander')
