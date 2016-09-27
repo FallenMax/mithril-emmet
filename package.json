@@ -19,6 +19,10 @@
   "activationEvents": [
     "onCommand:mithrilEmmet.expand"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FallenMax/mithril-emmet"
+  },
   "main": "./extension",
   "contributes": {
     "commands": [{
