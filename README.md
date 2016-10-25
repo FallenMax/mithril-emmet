@@ -32,6 +32,10 @@ Example:
 
 ## Release Notes
 
+### 0.4.0
+
+Support expanding while cursor is inside a abbreviation
+
 ### 0.3.0
 
 Remove tab stop placeholders from output
