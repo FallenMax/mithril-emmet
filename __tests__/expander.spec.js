@@ -124,6 +124,18 @@ it('extract abbreviation: cursor inside abbr (5)', () => {
   })
 })
 
+it('extract abbreviation: cursor inside abbr (6)', () => {
+  const { extract } = require('../lib/expander')
+  const input = 'a random[] and{} .fake-dom>.row>.col*5 (.real-dom>p{A paragraph}+.row☯)}'
+  const output = extract(input.replace('☯', ''), input.indexOf('☯'))
+
+  expect(output).toEqual({
+    abbr: `.real-dom>p{A paragraph}+.row`,
+    abbrStart: 40,
+    abbrEnd: 69,
+  })
+})
+
 it('expand abbreviation: simple', () => {
   const { expand } = require('../lib/expander')
   const input =
