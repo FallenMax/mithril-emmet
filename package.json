@@ -37,6 +37,11 @@
           "type": "string",
           "default": "m",
           "description": "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
+        },
+        "mithrilEmmet.outputDefaultTagName": {
+          "type": "boolean",
+          "default": true,
+          "description": "If false, default tag name ('div')  will be obmitted, i.e. '.some-class' instead of 'div.some-class'"
         }
       }
     }

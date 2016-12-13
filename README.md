@@ -30,7 +30,8 @@ Example:
 
 ```json
 {
-  "mithrilEmmet.vnodeFactoryFunctionName": "m"  //  Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'.
+  "mithrilEmmet.vnodeFactoryFunctionName": "m",  //  Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'.
+  "mithrilEmmet.outputDefaultTagName": true  //  If false, default tag name ('div')  will be obmitted, i.e. '.some-class' instead of 'div.some-class'
 }
 
 
