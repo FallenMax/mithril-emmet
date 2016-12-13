@@ -28,7 +28,18 @@
     "commands": [{
       "command": "mithrilEmmet.expand",
       "title": "Expand Emmet to Mithril"
-    }]
+    }],
+    "configuration": {
+      "type": "object",
+      "title": "Mithril Emmet configuration",
+      "properties": {
+        "mithrilEmmet.vnodeFactoryFunctionName": {
+          "type": "string",
+          "default": "m",
+          "description": "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
+        }
+      }
+    }
   },
   "scripts": {
     "test": "jest",

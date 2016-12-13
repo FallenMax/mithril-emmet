@@ -157,6 +157,28 @@ it('expand abbreviation: simple', () => {
   ))
 })
 
+
+it('expand abbreviation: simple with custom vnode function', () => {
+  const { expand } = require('../lib/expander')
+  const input =
+    'header>{I\'m a heading}+section>.row>.col*4'
+  const output = expand(input, { vnodeFactoryFunctionName: 'h' })
+
+  expect(trim(output)).toBe(trim(
+    `h('header', [
+  h('', 'I'm a heading'),
+  h('section',
+    h('.row', [
+      h('.col'),
+      h('.col'),
+      h('.col'),
+      h('.col')
+    ])
+  )
+])`
+  ))
+})
+
 it('expand abbreviation: complex', () => {
   const { expand } = require('../lib/expander')
   const input =

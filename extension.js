@@ -18,6 +18,10 @@ function activate(context) {
     const curLine = document.lineAt(line).text
 
     const { tabSize, insertSpaces } = editor.options
+    const {
+      vnodeFactoryFunctionName
+    } = vscode.workspace.getConfiguration('mithrilEmmet')
+
     const tab = insertSpaces ? ' '.repeat(tabSize) : '\t'
     const tabsAtStart = new RegExp(`^(${tab})*`)
     const indentLevel = (tabsAtStart.exec(curLine) || [])[0].length / tab.length
@@ -26,7 +30,7 @@ function activate(context) {
     let { abbr, abbrStart, abbrEnd } = extract(curLine, character)
     try {
       if (abbr) {
-        const output = expand(abbr, { tab, indentLevel })
+        const output = expand(abbr, { tab, indentLevel, vnodeFactoryFunctionName })
         return editor.edit(edit => {
             // edit.replace doesn't work well here, it messes up cursor position/selection
             edit.delete(new vscode.Range(line, abbrStart, line, abbrEnd))
