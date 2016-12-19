@@ -45,6 +45,10 @@ Example:
 
 ## Release Notes
 
+### 0.5.0
+
+Now support custom function name (to support hyperscript, cyclejs, etc.)
+
 ### 0.4.0
 
 Support expanding while cursor is inside a abbreviation
