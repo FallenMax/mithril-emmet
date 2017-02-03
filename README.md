@@ -40,7 +40,6 @@ Example:
 
 ## Known Issues
 
-- Does not support tab stops (see: https://github.com/Microsoft/vscode/issues/3210)
 - Some emmet snippets are not supported (e.g. `!!!` => `<!DOCTYPE html>`)
 
 ## Release Notes
