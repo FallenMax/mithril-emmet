@@ -1,6 +1,7 @@
 const vscode = require('vscode')
 const { expand, extract } = require('./lib/expander')
 
+const TABSTOP = /\${[^{}]+}/g
 
 function activate(context) {
 
@@ -31,16 +32,35 @@ function activate(context) {
     let { abbr, abbrStart, abbrEnd } = extract(curLine, character)
     try {
       if (abbr) {
-        const output = expand(abbr, { tab, indentLevel, vnodeFactoryFunctionName, outputDefaultTagName })
-        return editor.edit(edit => {
-            // edit.replace doesn't work well here, it messes up cursor position/selection
-            edit.delete(new vscode.Range(line, abbrStart, line, abbrEnd))
-            edit.insert(new vscode.Position(line, abbrStart), output)
-          })
-          .then(() => {
-            const cursor = selection.active // current cursor position after edit
-            editor.revealRange(new vscode.Range(line, abbrStart, cursor.line, cursor.character))
-          })
+        let output = expand(abbr, { tab, indentLevel, vnodeFactoryFunctionName, outputDefaultTagName })
+        if (!TABSTOP.test(output)) {
+          return editor.edit(edit => {
+              // edit.replace doesn't work well here, it messes up cursor position/selection
+              edit.delete(new vscode.Range(line, abbrStart, line, abbrEnd))
+              edit.insert(new vscode.Position(line, abbrStart), output)
+            })
+            .then(() => {
+              const cursor = selection.active // current cursor position after edit
+              editor.revealRange(new vscode.Range(line, abbrStart, cursor.line, cursor.character))
+            })
+        } else {
+          if (typeof editor.insertSnippet === 'function') {
+            let snippet = new vscode.SnippetString(output)
+            return editor.edit(edit => {
+                edit.delete(new vscode.Range(line, abbrStart, line, abbrEnd))
+              })
+              .then(() => editor.insertSnippet(snippet, new vscode.Position(line, abbrStart)))
+          } else {
+            return editor.edit(edit => {
+                edit.delete(new vscode.Range(line, abbrStart, line, abbrEnd))
+                edit.insert(new vscode.Position(line, abbrStart), output.replace(TABSTOP, ''))
+              })
+              .then(() => {
+                const cursor = selection.active // current cursor position after edit
+                editor.revealRange(new vscode.Range(line, abbrStart, cursor.line, cursor.character))
+              })
+          }
+        }
       } else {
         return vscode.window.showInformationMessage('[mithril-emmet] Nothing to expand')
       }
