@@ -45,6 +45,10 @@ Example:
 
 ## Release Notes
 
+### 0.6.0
+
+Support insert snippet
+
 ### 0.5.0
 
 Now support custom function name (to support hyperscript, cyclejs, etc.)
