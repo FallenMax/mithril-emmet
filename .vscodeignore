@@ -1,6 +1,13 @@
-.vscode/**
-typings/**
 __tests__/**
-images/**
 .gitignore
+.vscode-test/**
+.vscode/**
+images/**
 jsconfig.json
+out/**/*.map
+out/test/**
+src/**
+tsconfig.json
+tslint.json
+typings/**
+vsc-extension-quickstart.md

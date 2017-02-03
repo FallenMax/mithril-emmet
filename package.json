@@ -5,7 +5,7 @@
   "version": "0.6.1",
   "publisher": "FallenMax",
   "engines": {
-    "vscode": "^1.5.0"
+    "vscode": "^1.21.0"
   },
   "categories": [
     "Other"
@@ -23,12 +23,14 @@
     "type": "git",
     "url": "https://github.com/FallenMax/mithril-emmet"
   },
-  "main": "./extension",
+  "main": "./out/extension",
   "contributes": {
-    "commands": [{
-      "command": "mithrilEmmet.expand",
-      "title": "Expand Emmet to Mithril"
-    }],
+    "commands": [
+      {
+        "command": "mithrilEmmet.expand",
+        "title": "Expand Emmet to Mithril"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "Mithril Emmet configuration",
@@ -41,21 +43,45 @@
         "mithrilEmmet.outputDefaultTagName": {
           "type": "boolean",
           "default": true,
-          "description": "If false, default tag name ('div')  will be obmitted, i.e. '.some-class' instead of 'div.some-class'"
+          "description": "If false, default tag name ('div')  will be omitted, i.e. '.some-class' instead of 'div.some-class'"
         }
       }
     }
   },
   "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "jest": "^15.1.1",
-    "vscode": "^0.11.0"
+    "@types/jest": "^22.2.0",
+    "@types/node": "^9.4.7",
+    "@types/prettier": "^1.10.0",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "vscode": "^1.1.13"
   },
   "dependencies": {
-    "emmet": "^1.6.0"
+    "emmet": "^1.6.3",
+    "prettier": "^1.11.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
