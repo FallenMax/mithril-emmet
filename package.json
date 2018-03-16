@@ -2,23 +2,14 @@
   "name": "mithril-emmet",
   "displayName": "Mithril Emmet",
   "description": "Support Emmet(zen-coding) syntax for Mithril",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "publisher": "FallenMax",
   "engines": {
     "vscode": "^1.21.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "mithril",
-    "emmet",
-    "expander",
-    "snippet"
-  ],
-  "activationEvents": [
-    "onCommand:mithrilEmmet.expand"
-  ],
+  "categories": ["Other"],
+  "keywords": ["mithril", "emmet", "expander", "snippet"],
+  "activationEvents": ["onCommand:mithrilEmmet.expand"],
   "repository": {
     "type": "git",
     "url": "https://github.com/FallenMax/mithril-emmet"
@@ -38,12 +29,14 @@
         "mithrilEmmet.vnodeFactoryFunctionName": {
           "type": "string",
           "default": "m",
-          "description": "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
+          "description":
+            "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
         },
         "mithrilEmmet.outputDefaultTagName": {
           "type": "boolean",
           "default": true,
-          "description": "If false, default tag name ('div')  will be omitted, i.e. '.some-class' instead of 'div.some-class'"
+          "description":
+            "If false, default tag name ('div')  will be omitted, i.e. '.some-class' instead of 'div.some-class'"
         }
       }
     }
@@ -75,13 +68,6 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
