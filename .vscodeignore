@@ -4,8 +4,8 @@ __tests__/**
 .vscode/**
 images/**
 jsconfig.json
-out/**/*.map
-out/test/**
+out/**/*.spec.js
+out/**/*.spec.js.map
 src/**
 tsconfig.json
 tslint.json
