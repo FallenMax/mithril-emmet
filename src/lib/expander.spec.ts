@@ -187,3 +187,16 @@ it('expand abbreviation: with stop placeholders', () => {
 
   expect(format(output)).toBe(format("m('input', { type: '${1:text}' })"))
 })
+
+it('expand abbreviation: take CamelCase name as Component', () => {
+  const input = 'Header>{Im a heading}+Section>.row>.col*4'
+  const output = expand(input)
+
+  expect(format(output)).toBe(
+    format(`m(Header, [
+    m("", "Im a heading"),
+    m(Section, [m(".row", [m(".col"), m(".col"), m(".col"), m(".col")])])
+  ])
+  `)
+  )
+})

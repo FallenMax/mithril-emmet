@@ -109,8 +109,11 @@ const expandNode = (node: Node, options: ExpandOptions) => {
   const otherAttr = toOtherAttrString(attrs)
   const children = toChildrenString(node.children || [], content, options)
 
-  const selectorStr =
-    "'" + [name, id, classStr].filter(s => s !== '').join('') + "'"
+  const isComponent = /^[A-Z]/.test(name)
+
+  const selectorStr = isComponent
+    ? name
+    : "'" + [name, id, classStr].filter(s => s !== '').join('') + "'"
   const bodyStr = [selectorStr, otherAttr, children]
     .filter(s => s !== '')
     .join(',')
