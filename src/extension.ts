@@ -14,19 +14,6 @@ const handleExpand = async (): Promise<any> => {
     const curCursor = selection.active
     const curLine = document.lineAt(curCursor.line).text
 
-    const config = (() => {
-      const { tabSize, insertSpaces } = editor.options
-      const {
-        vnodeFactoryFunctionName,
-        outputDefaultTagName,
-      } = vscode.workspace.getConfiguration('mithrilEmmet')
-      const tab = insertSpaces ? ' '.repeat(tabSize as number) : '\t'
-      return {
-        tab,
-        vnodeFactoryFunctionName,
-        outputDefaultTagName,
-      }
-    })()
     const prettierConfig: any = (() => {
       try {
         return vscode.workspace.getConfiguration('prettier') || {}
@@ -34,12 +21,10 @@ const handleExpand = async (): Promise<any> => {
         return {}
       }
     })()
-
-    const indentLevel = (() => {
-      const tabsAtStart = new RegExp(`^(${config.tab})*`)
-      const match = tabsAtStart.exec(curLine)
-      return match ? match[0].length / config.tab.length : 0
-    })()
+    const config = {
+      ...vscode.workspace.getConfiguration('mithrilEmmet'),
+      prettierConfig,
+    }
 
     const { abbr, abbrStart, abbrEnd } = extract(curLine, curCursor.character)
 
@@ -49,10 +34,7 @@ const handleExpand = async (): Promise<any> => {
       )
     }
 
-    const expanded = expand(
-      abbr,
-      Object.assign({}, config, { indentLevel, prettierConfig })
-    )
+    const expanded = expand(abbr, config)
 
     const TABSTOP = /\${[^{}]+}/g
     const containsTapstop = TABSTOP.test(expanded)
@@ -75,6 +57,7 @@ const handleExpand = async (): Promise<any> => {
       )
     } else {
       const supportInsertSnippet = typeof editor.insertSnippet === 'function'
+
       if (supportInsertSnippet) {
         const snippet = new vscode.SnippetString(expanded)
         await editor.edit(edit => {
