@@ -3,6 +3,7 @@ __tests__/**
 .vscode-test/**
 .vscode/**
 images/**
+!images/logo.png
 jsconfig.json
 out/**/*.spec.js
 out/**/*.spec.js.map

@@ -2,7 +2,7 @@
   "name": "mithril-emmet",
   "displayName": "Mithril Emmet",
   "description": "Support Emmet(zen-coding) syntax for Mithril",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "publisher": "FallenMax",
   "engines": {
     "vscode": "^1.21.0"
@@ -69,5 +69,6 @@
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
-  }
+  },
+  "icon": "images/logo.png"
 }
