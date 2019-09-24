@@ -1,8 +1,16 @@
+> **Note**
+>
+> You **DON'T** need this extension to use Emmetin VS Code.
+>
+> Emmet (for HTML, CSS, JSX) is a built-in feature of VS Code.
+> This extension is created to extend its feature for [hyperscript][hyperscript] or [Mithril][mithril].
+
 # Mithril Emmet support for VS Code
 
 Add [Emmet][emmet] (zen-coding) support for [Mithril][mithril] inside vscode, can also be used to create [hyperscript][hyperscript].
 
 ## Screenshot
+
 ![screenshot](images/screenshot.gif)
 
 ## Usage
@@ -14,29 +22,28 @@ Optionally, You can bind `mithrilEmmet.expand` to a shortcut via `File -> Prefer
 Example:
 
 ```json
-[{
-  "key": "cmd+alt+e",
-  "command": "mithrilEmmet.expand",
-  "when": "editorFocus"
-},
-{
-  "key": "ctrl+alt+e",
-  "command": "mithrilEmmet.expand",
-  "when": "editorFocus"
-}]
+[
+  {
+    "key": "cmd+alt+e",
+    "command": "mithrilEmmet.expand",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+alt+e",
+    "command": "mithrilEmmet.expand",
+    "when": "editorFocus"
+  }
+]
 ```
 
 ## Configuration
 
 ```json
 {
-  "mithrilEmmet.vnodeFactoryFunctionName": "m",  //  Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'.
-  "mithrilEmmet.outputDefaultTagName": true  //  If false, default tag name ('div')  will be obmitted, i.e. '.some-class' instead of 'div.some-class'
+  "mithrilEmmet.vnodeFactoryFunctionName": "m", //  Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'.
+  "mithrilEmmet.outputDefaultTagName": true //  If false, default tag name ('div')  will be obmitted, i.e. '.some-class' instead of 'div.some-class'
 }
-
-
 ```
-
 
 ## Known Issues
 
@@ -63,7 +70,6 @@ Remove tab stop placeholders from output
 ### 0.0.1
 
 First release
-
 
 [emmet]: http://emmet.io/
 [mithril]: http://mithril.js.org/
