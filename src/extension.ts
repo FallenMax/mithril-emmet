@@ -34,7 +34,7 @@ const handleExpand = async (): Promise<any> => {
       )
     }
 
-    const expanded = expand(abbr, config)
+    const expanded = expand(abbr, config).trim()
 
     const TABSTOP = /\${[^{}]+}/g
     const containsTapstop = TABSTOP.test(expanded)
