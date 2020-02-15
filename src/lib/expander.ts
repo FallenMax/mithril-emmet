@@ -1,6 +1,6 @@
-// @ts-ignore
-import parser = require('emmet/lib/parser/abbreviation')
-import prettier = require('prettier')
+import * as emmet from 'emmet'
+import * as prettier from 'prettier'
+import { AbbreviationNode, Value } from '@emmetio/abbreviation'
 
 type Node = {
   name: () => string
@@ -8,6 +8,30 @@ type Node = {
   attributeList: () => Attr[]
   children?: Node[]
 }
+
+const pickFirstValue = (values: Value[] | undefined): string => {
+  const value = (values || [])[0]
+  return typeof value === 'string' ? value : ''
+}
+
+const asNode = (abbrNode: AbbreviationNode): Node => {
+  return {
+    name() {
+      return abbrNode.name || ''
+    },
+    content: pickFirstValue(abbrNode.value),
+    attributeList() {
+      return (abbrNode.attributes || []).map((attr) => {
+        return {
+          name: attr.name || '',
+          value: pickFirstValue(attr.value),
+        }
+      })
+    },
+    children: abbrNode.children?.map(asNode),
+  }
+}
+
 type Attr = {
   name: string
   value: string
@@ -15,7 +39,7 @@ type Attr = {
 
 const find = (
   text: string,
-  regex: RegExp
+  regex: RegExp,
 ): { match: string; start: number; end: number } => {
   const result = regex.exec(text)
   if (result) {
@@ -33,7 +57,7 @@ const find = (
  */
 export function extract(
   line: string,
-  cursorPos: number
+  cursorPos: number,
 ): { abbr: string; abbrStart: number; abbrEnd: number } {
   const before = line.substring(0, cursorPos)
   const after = line.substring(cursorPos, line.length)
@@ -41,11 +65,11 @@ export function extract(
   const ABBR_AFTER = /^(([^\{\}]*})?(({[^{}]+})|(\[[^\[\]]+\])|([\w\.\*\>\+\-#]+))+)/
   const { match: abbrBefore, start: startBefore, end: endBefore } = find(
     before,
-    ABBR_BEFORE
+    ABBR_BEFORE,
   )
   const { match: abbrAfter, start: startAfter, end: endAfter } = find(
     after,
-    ABBR_AFTER
+    ABBR_AFTER,
   )
 
   return {
@@ -58,45 +82,46 @@ export function extract(
 export type ExpandOptions = {
   vnodeFactoryFunctionName: string
   outputDefaultTagName: boolean
-  prettierConfig?: any
 }
 
 const toOtherAttrString = (attrs: Attr[]): string => {
-  const otherAttrs = attrs.filter(attr => !/^(class|id)$/.test(attr.name))
+  const otherAttrs = attrs.filter((attr) => !/^(class|id)$/.test(attr.name))
 
   return otherAttrs.length
     ? JSON.stringify(
         otherAttrs.reduce((o: any, { name, value }) => {
           o[name] = value
           return o
-        }, {})
+        }, {}),
       )
     : ''
 }
 
 const toClassString = (attrs: Attr[]): string => {
-  const classAttr = attrs.find(attr => attr.name === 'class')
+  const classAttr = attrs.find((attr) => attr.name === 'class')
   return classAttr == null
     ? ''
     : classAttr.value
         .split(' ')
-        .map(s => `.${s}`)
+        .map((s) => `.${s}`)
         .join('')
 }
 
 const toIdString = (attrs: Attr[]): string => {
-  const idAttr = attrs.find(attr => attr.name === 'id')
+  const idAttr = attrs.find((attr) => attr.name === 'id')
   return idAttr == null ? '' : `#${idAttr.value}`
 }
 
 const toChildrenString = (
   children: Node[],
   content: string,
-  options: ExpandOptions
+  options: ExpandOptions,
 ): string => {
   return children.length === 0
-    ? content === '' ? '' : JSON.stringify(content)
-    : '[' + children.map(c => expandNode(c, options)).join(',') + ']'
+    ? content === ''
+      ? ''
+      : JSON.stringify(content)
+    : '[' + children.map((c) => expandNode(c, options)).join(',') + ']'
 }
 
 const expandNode = (node: Node, options: ExpandOptions) => {
@@ -113,9 +138,9 @@ const expandNode = (node: Node, options: ExpandOptions) => {
 
   const selectorStr = isComponent
     ? name
-    : "'" + [name, id, classStr].filter(s => s !== '').join('') + "'"
+    : "'" + [name, id, classStr].filter((s) => s !== '').join('') + "'"
   const bodyStr = [selectorStr, otherAttr, children]
-    .filter(s => s !== '')
+    .filter((s) => s !== '')
     .join(',')
 
   return `${options.vnodeFactoryFunctionName}(${bodyStr})`
@@ -126,23 +151,26 @@ export function expand(
   {
     vnodeFactoryFunctionName = 'm',
     outputDefaultTagName = false,
-    prettierConfig,
-  } = {} as Partial<ExpandOptions>
+  } = {} as Partial<ExpandOptions>,
 ) {
-  const root: Node = parser.parse(abbr, { syntax: 'html' })
+  const root = emmet.parseMarkup(abbr, emmet.resolveConfig({ syntax: 'html' }))
 
   const expanded: string = (root.children || [])
-    .map(node =>
-      expandNode(node, {
+    .map((abbrNode) =>
+      expandNode(asNode(abbrNode), {
         vnodeFactoryFunctionName,
         outputDefaultTagName,
-      })
+      }),
     )
     .join(',')
 
   let formatted
   try {
-    formatted = prettier.format(expanded, prettierConfig)
+    formatted = prettier.format(expanded, {
+      semi: false,
+      singleQuote: true,
+      parser: 'babel',
+    })
   } catch (error) {
     // console.error('[mithril-emmet]', error)
     formatted = expanded

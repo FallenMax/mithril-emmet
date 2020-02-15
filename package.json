@@ -7,9 +7,18 @@
   "engines": {
     "vscode": "^1.21.0"
   },
-  "categories": ["Other"],
-  "keywords": ["mithril", "emmet", "expander", "snippet"],
-  "activationEvents": ["onCommand:mithrilEmmet.expand"],
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "mithril",
+    "emmet",
+    "expander",
+    "snippet"
+  ],
+  "activationEvents": [
+    "onCommand:mithrilEmmet.expand"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/FallenMax/mithril-emmet"
@@ -29,14 +38,12 @@
         "mithrilEmmet.vnodeFactoryFunctionName": {
           "type": "string",
           "default": "m",
-          "description":
-            "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
+          "description": "Specifies the name of vnode factory function. E.g. for mithril, use 'm'; for hyperscript, use 'h'."
         },
         "mithrilEmmet.outputDefaultTagName": {
           "type": "boolean",
           "default": true,
-          "description":
-            "If false, default tag name ('div')  will be omitted, i.e. '.some-class' instead of 'div.some-class'"
+          "description": "If false, default tag name ('div')  will be omitted, i.e. '.some-class' instead of 'div.some-class'"
         }
       }
     }
@@ -50,25 +57,38 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.7",
-    "@types/prettier": "^1.10.0",
-    "jest": "^22.4.2",
-    "ts-jest": "^22.4.1",
-    "tslint": "^5.9.1",
-    "typescript": "^2.7.2",
-    "vscode": "^1.1.13"
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.1",
+    "@types/prettier": "^1.19.0",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5",
+    "vscode": "^1.1.36"
   },
   "dependencies": {
-    "emmet": "^1.6.3",
-    "prettier": "^1.11.1"
+    "emmet": "^2.0.0-rc.10",
+    "@emmetio/abbreviation": "^2.0.0-rc.6",
+    "prettier": "^1.19.1"
   },
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    }
   },
   "icon": "images/logo.png"
 }
