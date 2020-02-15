@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
-import { expand, extract } from './lib/expander'
+import { expand } from './lib/expander'
+import { extract } from './lib/extractor'
 
 const handleExpand = async (): Promise<void> => {
   try {
