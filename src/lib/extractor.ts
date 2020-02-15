@@ -1,3 +1,5 @@
+import * as emmet from 'emmet'
+
 const find = (
   text: string,
   regex: RegExp,
@@ -28,9 +30,9 @@ export function extract(
   abbrStart: number
   abbrEnd: number
 } {
-  // official extractor doesnt work great :(
-  // let's continue to use our own
-  //
+  // official extractor doesn't work great :(
+  // continue to use our own
+
   // const e = emmet.extract(line, cursorPos, { lookAhead: true, type: 'markup' })
   // if (!e) {
   //   return { abbr: '', abbrStart: 0, abbrEnd: 0 }
@@ -44,8 +46,8 @@ export function extract(
 
   const before = line.substring(0, cursorPos)
   const after = line.substring(cursorPos, line.length)
-  const ABBR_BEFORE = /((({[^{}]+})|(\[[^\[\]]+\])|[\w\.\*\>\+\-#]+)+({[^\{\}]*)?)$/
-  const ABBR_AFTER = /^(([^\{\}]*})?(({[^{}]+})|(\[[^\[\]]+\])|([\w\.\*\>\+\-#]+))+)/
+  const ABBR_BEFORE = /((({[^{}]+})|(\[[^[]]+\])|(\([^()]+\))|[\w\.\*\>\+\-#]+)+({[^{}]*)?)$/
+  const ABBR_AFTER = /^(([^{}]*})?(({[^{}]+})|(\[[^[]]+\])|(\([^()]+\))|([\w\.\*\>\+\-#]+))+)/
   const { match: abbrBefore, start: startBefore, end: endBefore } = find(
     before,
     ABBR_BEFORE,

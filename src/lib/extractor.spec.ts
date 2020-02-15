@@ -107,3 +107,13 @@ it('extract abbreviation: cursor inside abbr (6)', () => {
     abbrEnd: 69,
   })
 })
+
+it('extract abbreviation: with grouping', () => {
+  const input = 'abc div>(header>ul>li*2>a)+footer>p☯ def'
+  const output = extract(input.replace('☯', ''), input.indexOf('☯'))
+  expect(output).toEqual({
+    abbr: `div>(header>ul>li*2>a)+footer>p`,
+    abbrStart: 4,
+    abbrEnd: 35,
+  })
+})
