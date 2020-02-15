@@ -2,7 +2,7 @@
   "name": "mithril-emmet",
   "displayName": "Mithril Emmet",
   "description": "Support Emmet(zen-coding) syntax for Mithril",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "publisher": "FallenMax",
   "engines": {
     "vscode": "^1.21.0"
