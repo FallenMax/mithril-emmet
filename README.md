@@ -1,6 +1,6 @@
 > **Note**
 >
-> You **DON'T** need this extension to use Emmetin VS Code.
+> You **DON'T** need this extension to use Emmet in VS Code.
 >
 > Emmet (for HTML, CSS, JSX) is a built-in feature of VS Code.
 > This extension is created to extend its feature for [hyperscript][hyperscript] or [Mithril][mithril].
