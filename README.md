@@ -1,8 +1,8 @@
 > **Note**
 >
-> You **DON'T** need this extension to use Emmet in VS Code.
+> You might not need this extension to use Emmet in VS Code.
 >
-> Emmet (for HTML, CSS, JSX) is a built-in feature of VS Code.
+> Emmet for html/css/jsx is built-in feature of VS Code.
 > This extension is created to extend its feature for [hyperscript][hyperscript] or [Mithril][mithril].
 
 # Mithril Emmet support for VS Code
@@ -45,32 +45,6 @@ Example:
 }
 ```
 
-## Known Issues
+## Buy me a coffee
 
-- Some emmet snippets are not supported (e.g. `!!!` => `<!DOCTYPE html>`)
-
-## Release Notes
-
-### 0.6.0
-
-Support insert snippet
-
-### 0.5.0
-
-Now support custom function name (to support hyperscript, cyclejs, etc.)
-
-### 0.4.0
-
-Support expanding while cursor is inside a abbreviation
-
-### 0.3.0
-
-Remove tab stop placeholders from output
-
-### 0.0.1
-
-First release
-
-[emmet]: http://emmet.io/
-[mithril]: http://mithril.js.org/
-[hyperscript]: https://github.com/dominictarr/hyperscript
+https://www.buymeacoffee.com/fallenmax
