@@ -1,9 +1,7 @@
-> **Note**
->
-> You might not need this extension to use Emmet in VS Code.
->
-> Emmet for html/css/jsx is built-in feature of VS Code.
-> This extension is created to extend its feature for [hyperscript][hyperscript] or [Mithril][mithril].
+**Uninstall this extension unless you are using mithril.js/hyperscript**
+
+> Emmet (for HTML, CSS, JSX) is a built-in feature of VS Code. You don't need this extension to use it.
+> This extension is created to allow using Emmet to write [mithril.js][mithril] or other [hyperscript][hyperscript] framework.
 
 # Mithril Emmet support for VS Code
 
